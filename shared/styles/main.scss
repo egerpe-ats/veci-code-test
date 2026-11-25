@@ -1,0 +1,323 @@
+@use './variables' as *;
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/500.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: $font-family;
+  font-size: 1.125rem;
+  line-height: 1.45;
+  color: $color-text;
+  background: $bg-gradient fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 72px 16px 40px;
+}
+
+.card {
+  width: 100%;
+  max-width: 900px;
+  padding: 50px;
+  background: $color-surface;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+
+  &__title {
+    margin: 0;
+    font-size: 2.5rem;
+    line-height: 1.1;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  &__text {
+    margin: 12px 0 0;
+    text-align: center;
+  }
+}
+
+.list-box {
+  position: relative;
+  height: 230px;
+  margin-top: 35px;
+  overflow-y: auto;
+  background: $color-field;
+  border: 1px solid $color-border;
+
+  &__empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0 24px;
+    color: $color-placeholder;
+    text-align: center;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 12px 10px;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 6px 15px;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: $color-primary-soft;
+    }
+
+    &[aria-selected='true'] {
+      color: $color-surface;
+      background: $color-primary;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+
+  &__end {
+    margin-left: auto;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.5rem 30px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid $color-primary;
+  border-radius: $radius-pill;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  &--primary {
+    min-width: 140px;
+    color: $color-surface;
+    background: $color-primary;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-hover;
+      border-color: $color-primary-hover;
+    }
+  }
+
+  &--secondary {
+    color: $color-primary;
+    background: $color-surface;
+
+    &:hover:not(:disabled) {
+      background: $color-primary-soft;
+    }
+  }
+
+  &--icon {
+    width: 80px;
+    padding: 0;
+  }
+
+  &__icon {
+    width: 1.25em;
+    height: auto;
+  }
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 72px 16px 40px;
+  overflow-y: auto;
+  background: $color-backdrop;
+  animation: modal-fade-in 0.3s ease;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__dialog {
+    width: 100%;
+    max-width: 700px;
+    padding: 50px;
+    background: $color-surface;
+    border-radius: $radius-card;
+    box-shadow: $shadow-modal;
+    animation: modal-slide-down 0.35s ease-in-out;
+  }
+
+  &__title {
+    display: block;
+    margin: 0;
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    min-height: 3.75rem;
+    margin-top: 20px;
+    padding: 0.75rem 20px;
+    font: inherit;
+    color: $color-text;
+    background: $color-field;
+    border: 1px solid $color-border;
+    border-radius: 0;
+
+    &::placeholder {
+      color: $color-placeholder;
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 1px $color-primary;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+  }
+}
+
+@keyframes modal-fade-in {
+  from {
+    background: transparent;
+  }
+}
+
+@keyframes modal-slide-down {
+  from {
+    transform: translateY(calc(-100% - 72px));
+  }
+}
+
+.switcher {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 5;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: $radius-pill;
+  box-shadow: $shadow-card;
+  transform: translateX(-50%);
+  backdrop-filter: blur(6px);
+
+  &__link {
+    padding: 4px 14px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: $color-primary;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: $radius-pill;
+
+    &:hover {
+      background: $color-primary-soft;
+    }
+
+    &[aria-current='page'] {
+      color: $color-surface;
+      background: $color-primary;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .card,
+  .modal__dialog {
+    padding: 28px 20px;
+  }
+
+  .card {
+    &__title {
+      font-size: 1.75rem;
+      line-height: 1.2;
+    }
+
+    &__text {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+
+  .actions,
+  .modal__actions {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 0.5rem 18px;
+
+    &--primary {
+      min-width: 96px;
+    }
+
+    &--icon {
+      width: 60px;
+      padding: 0;
+    }
+  }
+}

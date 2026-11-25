@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical proof - Vanilla JS</title>
+    <link rel="stylesheet" href="../shared/styles/main.scss" />
+  </head>
+  <body>
+    <nav class="switcher" aria-label="Implementation">
+      <a class="switcher__link" href="../index.html">React</a>
+      <a class="switcher__link" href="./index.html" aria-current="page">Vanilla JS</a>
+    </nav>
+
+    <main class="page">
+      <section class="card" aria-labelledby="app-title">
+        <h1 class="card__title" id="app-title">This is a technical proof</h1>
+        <p class="card__text">
+          Lorem ipsum dolor sit amet consectetur adipiscing, elit mus primis nec inceptos. Lacinia
+          habitasse arcu molestie maecenas cursus quam nunc, hendrerit posuere augue fames dictumst
+          placerat porttitor, dis mi pharetra vestibulum venenatis phasellus.
+        </p>
+
+        <div class="list-box">
+          <ul
+            class="list"
+            role="listbox"
+            aria-label="Items"
+            aria-multiselectable="true"
+            id="item-list"
+          ></ul>
+          <p class="list-box__empty" id="empty-message" hidden>
+            No items yet. Click Add to create one.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button
+            type="button"
+            class="btn btn--secondary btn--icon"
+            id="undo-btn"
+            aria-label="Undo"
+            title="Undo"
+            disabled
+          >
+            <svg
+              class="btn__icon"
+              viewBox="0 0 21 19"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+              aria-hidden="true"
+            >
+              <path d="M3.5 13.4A8.9 8.9 0 1 0 2.6 9.2" />
+              <path d="M0.6 5.2L2.6 9.2L6.4 7.3" />
+            </svg>
+          </button>
+          <button type="button" class="btn btn--secondary" id="delete-btn" disabled>Delete</button>
+          <button type="button" class="btn btn--primary actions__end" id="add-btn">Add</button>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="add-modal" hidden>
+      <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <form id="add-form" novalidate>
+          <label class="modal__title" id="modal-title" for="item-input">Add item to list</label>
+          <input
+            class="modal__input"
+            id="item-input"
+            type="text"
+            placeholder="Type the text here..."
+            autocomplete="off"
+          />
+          <div class="modal__actions">
+            <button type="submit" class="btn btn--primary" id="confirm-add-btn" disabled>Add</button>
+            <button type="button" class="btn btn--secondary" id="cancel-add-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
