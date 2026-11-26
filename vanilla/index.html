@@ -62,7 +62,13 @@
     </main>
 
     <div class="modal" id="add-modal" hidden>
-      <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        tabindex="-1"
+      >
         <form id="add-form" novalidate>
           <label class="modal__title" id="modal-title" for="item-input">Add item to list</label>
           <input

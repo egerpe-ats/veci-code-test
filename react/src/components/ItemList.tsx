@@ -1,14 +1,14 @@
 import type { KeyboardEvent } from 'react';
 import type { ListItem } from '../../../shared/listReducer';
 
-type ItemListProps = {
+type Props = {
   items: ListItem[];
   selectedIds: string[];
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
 };
 
-const ItemList = ({ items, selectedIds, onToggle, onRemove }: ItemListProps) => {
+const ItemList = ({ items, selectedIds, onToggle, onRemove }: Props) => {
   const handleKeyDown = (event: KeyboardEvent<HTMLLIElement>, id: string) => {
     if (event.key === ' ' || event.key === 'Enter') {
       event.preventDefault();
@@ -21,7 +21,6 @@ const ItemList = ({ items, selectedIds, onToggle, onRemove }: ItemListProps) => 
       <ul className="list" role="listbox" aria-label="Items" aria-multiselectable="true">
         {items.map((item) => {
           const isSelected = selectedIds.includes(item.id);
-
           return (
             <li
               key={item.id}

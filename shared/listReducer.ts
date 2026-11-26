@@ -18,15 +18,12 @@ export type ListAction =
 
 export const INITIAL_ITEMS = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
-let nextId = 1;
-const createId = (): string => `item-${nextId++}`;
-
 export const createInitialState = (initialTexts: string[] = INITIAL_ITEMS): ListState => {
   return {
     items: initialTexts
       .map((text) => text.trim())
       .filter(Boolean)
-      .map((text) => ({ id: createId(), text })),
+      .map((text) => ({ id: crypto.randomUUID(), text })),
     selectedIds: [],
     history: [],
   };
@@ -47,7 +44,7 @@ export const listReducer = (state: ListState, action: ListAction): ListState => 
     case 'ADD': {
       const text = action.text.trim();
       if (!text) return state;
-      const nextItems = [...state.items, { id: createId(), text }];
+      const nextItems = [...state.items, { id: crypto.randomUUID(), text }];
       return getNextStateWithHistory(state, nextItems);
     }
 
